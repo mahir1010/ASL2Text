@@ -10,6 +10,8 @@ import numpy as np
 import sys, os
 import glob
 # import imutils
+from VideoGet import VideoGet
+from VideoShow import VideoShow
 
 
 #Skin Detection using HSV color space
@@ -26,7 +28,7 @@ def skinDetectionHSV(img):
     skinHSV = cv2.bitwise_and(image, image, mask = skinMaskHSV)
     return skinHSV
 
-def matchTemplate(img, templates, titles,method=cv2.TM_CCORR_NORMED):
+def matchTemplate(img, templates, titles, method=cv2.TM_CCORR_NORMED):
     ''' 
     Parameters
     ----------
@@ -52,32 +54,55 @@ def matchTemplate(img, templates, titles,method=cv2.TM_CCORR_NORMED):
         r = img.shape[1] / float(resized.shape[1])
         # edged = cv2.Canny(resized, 40, 90)
         edged=resized
-        cv2.imshow('frame', edged)
-        for template,t in zip(templates,titles):
+        # cv2.imshow('frame', edged)
+        for template, t in zip(templates,titles):
             tH, tW = template.shape[:2]
             if resized.shape[0] < tH or resized.shape[1] < tW:
                 break
-            cv2.imshow("Template", template)
+            # cv2.imshow("Template", template)
             result = cv2.matchTemplate(edged, template, method)
             (_, maxVal, _, maxLoc) = cv2.minMaxLoc(result)
             # if we have found a new maximum correlation value, then update
             # the bookkeeping variable
             if found is None or maxVal > found[0]:
-                found = (maxVal, maxLoc, r,t)
+                found = (maxVal, maxLoc, r, t)
             
  	# unpack the bookkeeping variable and compute the (x, y) coordinates
  	# of the bounding box based on the resized ratio
-    (maxVal, maxLoc, r,t) = found
+    (maxVal, maxLoc, r, t) = found
     (startX, startY) = (int(maxLoc[0] * r), int(maxLoc[1] * r))
     (endX, endY) = (int((maxLoc[0] + tW) * r), int((maxLoc[1] + tH) * r))
     
-    return maxVal,t,startX, startY, endX, endY
-    
+    return maxVal, t, startX, startY, endX, endY
 
+    
+def main():
+    """
+    Dedicated thread for grabbing video frames with VideoGet object.
+    Dedicated thread for showing video frames with VideoShow object.
+    Main thread serves only to pass frames between VideoGet and
+    VideoShow objects/threads.
+    """
+    source=0
+    video_getter = VideoGet(source).start()
+    video_shower = VideoShow(video_getter.frame).start()
+    # cps = CountsPerSec().start()
+
+    while True:
+        if video_getter.stopped or video_shower.stopped:
+            video_shower.stop()
+            video_getter.stop()
+            break
+
+        frame = video_getter.frame
+        # frame = putIterationsPerSec(frame, cps.countsPerSec())
+        video_shower.frame = frame
+        # cps.increment()
 
 
 
 if __name__ == "__main__":
+    # main()
     
     # read templates from folder
     templates = glob.glob("templates/*.png")
@@ -87,35 +112,46 @@ if __name__ == "__main__":
     names = [(name.split("/")[-1]).split(".")[0] for name in templates]
     # for n,t in zip(names,templates_gray):
     #     cv2.imshow(n,t)
+    # print([tplt.shape for tplt in templates_gray])
 
-    cap = cv2.VideoCapture(0)
-    # if not successful, exit program
-    if not cap.isOpened():
-        print("Cannot open the video cam")
-        sys.exit()
+    # cap = cv2.VideoCapture(0)
+    # # if not successful, exit program
+    # if not cap.isOpened():
+    #     print("Cannot open the video cam")
+    #     sys.exit()
+    video_getter = VideoGet(0).start()
+    # video_shower = VideoShow(video_getter.frame).start()
     
-    # create a window called "MyVideo0"
+    
+    # # create a window called "MyVideo"
     cv2.namedWindow("MyVideo", cv2.WINDOW_AUTOSIZE)
     fgbg = cv2.createBackgroundSubtractorKNN()
     # fourcc = cv2.VideoWriter_fourcc(*'XVID')
     # out = cv2.VideoWriter('output.avi', fourcc,30.0, (640, 480))
+    
     while(True):
-        # Capture frame-by-frame
-        ret, frame = cap.read()
-        if not ret:
-            print("Cannot read a frame from video stream")
-            break
+        # # Capture frame-by-frame
+        # ret, frame = cap.read()
+        # if not ret:
+        #     print("Cannot read a frame from video stream")
+        #     break
+        
+        frame = video_getter.frame
+        frame = cv2.resize(frame, (0,0), fx=0.8, fy=0.8)
+        # video_shower.frame = frame
+        
         fgmask = fgbg.apply(frame)
         fgmask = cv2.medianBlur(fgmask, 3)
         fgmask = cv2.blur(fgmask,(3,3))
         fgmask = cv2.dilate(fgmask,np.ones((7,7)))
         fgmask = ((fgmask>0)*255).astype(np.uint8)
         skinMatching = skinDetectionHSV(frame)
-        skinMatching= cv2.medianBlur(skinMatching,5)
-        skinMatching=cv2.cvtColor(skinMatching, cv2.COLOR_BGR2GRAY)
+        skinMatching = cv2.medianBlur(skinMatching,5)
+        skinMatching = cv2.cvtColor(skinMatching, cv2.COLOR_BGR2GRAY)
         skinMatching = ((skinMatching>0)*255).astype(np.uint8)
         fgmask = cv2.bitwise_and(skinMatching,fgmask)
         # fgmask = cv2.blur(fgmask,(5,5))
+        tt = np.zeros_like(fgmask)
         contours, hierarchy = cv2.findContours(fgmask,cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         if len(contours)!=0:
             maxCont = max(contours, key=cv2.contourArea)
@@ -127,16 +163,29 @@ if __name__ == "__main__":
                 box = [(startX, startY), (endX, endY)]
                 cv2.putText(frame,name,(40,40),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,0),2)
                 cv2.rectangle(frame,box[0],box[1],(255,255,255),2)
-                cv2.imshow("mask", blankImage)
+                # cv2.imshow("mask", blankImage)
+                idx = names.index(name)
+                fH, fW = fgmask.shape[:2]
+                tH, tW = templates_gray[idx].shape[:2]
+                tt = cv2.copyMakeBorder(templates_gray[idx], 50, fH-tH-50, 50, fW-tW-50, cv2.BORDER_CONSTANT,value=0)
         # cv2.imshow("skinDetection",skinMatching)
+        
         # cv2.imshow('merged', fgmask)
-        cv2.imshow("MyVideo", frame)
+        v_comb = np.vstack([fgmask, tt])
+        v_comb = cv2.resize(v_comb, (0,0), fx=0.5, fy=0.5)
+        v_comb = cv2.cvtColor(v_comb, cv2.COLOR_GRAY2BGR)
+        combined = np.hstack([frame, v_comb])
+        
+        cv2.imshow("MyVideo", combined)
+        # video_shower.frame = combined
         # out.write(frame)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            cv2.imwrite('skinDetection.png', blankImage)
+        if cv2.waitKey(1) & 0xFF == ord('q') or video_getter.stopped:
+            video_getter.stop()
+            # video_shower.stop()
+            # cv2.imwrite('skinDetection.png', blankImage)
             break
     
 
     # When everything done, release the capture
-    cap.release()
+    # cap.release()
     cv2.destroyAllWindows()
