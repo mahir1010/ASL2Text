@@ -190,7 +190,7 @@ if __name__ == "__main__":
 
     # When everything done, release the capture
     # cap.release()
-    video_getter.release()
+    # video_getter.release()
     cv2.destroyAllWindows()
 
 
