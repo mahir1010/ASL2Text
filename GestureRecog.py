@@ -60,6 +60,7 @@ def matchTemplate(img, templates, titles, method=cv2.TM_CCORR_NORMED):
             if resized.shape[0] < tH or resized.shape[1] < tW:
                 break
             # cv2.imshow("Template", template)
+
             result = cv2.matchTemplate(edged, template, method)
             (_, maxVal, _, maxLoc) = cv2.minMaxLoc(result)
             # if we have found a new maximum correlation value, then update
@@ -126,9 +127,10 @@ if __name__ == "__main__":
     # # create a window called "MyVideo"
     cv2.namedWindow("MyVideo", cv2.WINDOW_AUTOSIZE)
     fgbg = cv2.createBackgroundSubtractorKNN()
-    # fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    # out = cv2.VideoWriter('output.avi', fourcc,30.0, (640, 480))
     
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    out = cv2.VideoWriter('output.avi', fourcc,30.0, (640, 480))
+
     while(True):
         # # Capture frame-by-frame
         # ret, frame = cap.read()
@@ -182,10 +184,13 @@ if __name__ == "__main__":
         if cv2.waitKey(1) & 0xFF == ord('q') or video_getter.stopped:
             video_getter.stop()
             # video_shower.stop()
-            # cv2.imwrite('skinDetection.png', blankImage)
+            cv2.imwrite('skinDetection.png', blankImage)
             break
     
 
     # When everything done, release the capture
     # cap.release()
+    video_getter.release()
     cv2.destroyAllWindows()
+
+
