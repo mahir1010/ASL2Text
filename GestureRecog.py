@@ -97,8 +97,8 @@ if __name__ == "__main__":
     # create a window called "MyVideo0"
     cv2.namedWindow("MyVideo", cv2.WINDOW_AUTOSIZE)
     fgbg = cv2.createBackgroundSubtractorKNN()
-    # fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    # out = cv2.VideoWriter('output.avi', fourcc,30.0, (640, 480))
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    out = cv2.VideoWriter('output.avi', fourcc,30.0, (640, 480))
     while(True):
         # Capture frame-by-frame
         ret, frame = cap.read()
@@ -131,7 +131,7 @@ if __name__ == "__main__":
         # cv2.imshow("skinDetection",skinMatching)
         # cv2.imshow('merged', fgmask)
         cv2.imshow("MyVideo", frame)
-        # out.write(frame)
+        out.write(frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             cv2.imwrite('skinDetection.png', blankImage)
             break
