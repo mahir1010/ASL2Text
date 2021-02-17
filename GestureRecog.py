@@ -127,7 +127,7 @@ if __name__ == "__main__":
                 box = [(startX, startY), (endX, endY)]
                 cv2.putText(frame,name,(40,40),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,0),2)
                 cv2.rectangle(frame,box[0],box[1],(255,255,255),2)
-                cv2.imshow("mask", blankImage)
+            cv2.imshow("mask", blankImage)
         # cv2.imshow("skinDetection",skinMatching)
         # cv2.imshow('merged', fgmask)
         cv2.imshow("MyVideo", frame)
