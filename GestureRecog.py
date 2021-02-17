@@ -52,12 +52,12 @@ def matchTemplate(img, templates, titles,method=cv2.TM_CCORR_NORMED):
         r = img.shape[1] / float(resized.shape[1])
         # edged = cv2.Canny(resized, 40, 90)
         edged=resized
-        cv2.imshow('frame', edged)
+#         cv2.imshow('frame', edged)
         for template,t in zip(templates,titles):
             tH, tW = template.shape[:2]
             if resized.shape[0] < tH or resized.shape[1] < tW:
                 break
-            cv2.imshow("Template", template)
+#             cv2.imshow("Template", template)
             result = cv2.matchTemplate(edged, template, method)
             (_, maxVal, _, maxLoc) = cv2.minMaxLoc(result)
             # if we have found a new maximum correlation value, then update
