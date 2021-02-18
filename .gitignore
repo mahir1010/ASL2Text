@@ -1,2 +1,4 @@
-output.avi
+__pycache__
+*.avi
+output.mp4
 skinDetection.png
