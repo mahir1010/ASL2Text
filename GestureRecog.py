@@ -82,18 +82,8 @@ if __name__ == "__main__":
     # read templates from folder
     templates = glob.glob("templates/*.png")
 
-    # templates_gray = [ cv2.Canny(cv2.imread(template,0), 40,90) for template in templates ]
     templates_gray = [cv2.imread(template, 0) for template in templates]
     names = [(name.split("/")[-1]).split(".")[0] for name in templates]
-    # for n,t in zip(names,templates_gray):
-    #     cv2.imshow(n,t)
-    # print([tplt.shape for tplt in templates_gray])
-
-    # cap = cv2.VideoCapture(0)
-    # # if not successful, exit program
-    # if not cap.isOpened():
-    #     print("Cannot open the video cam")
-    #     sys.exit()
     
     fW = 640
     fH = 480
@@ -104,19 +94,13 @@ if __name__ == "__main__":
     fgbg = cv2.createBackgroundSubtractorKNN()
     
     fourcc = cv2.VideoWriter_fourcc(*'MPEG')
-    out = cv2.VideoWriter('output.avi', fourcc, 9.0, (640, 480))
+    out = cv2.VideoWriter('myOutput.avi', fourcc, 9.0, (fW*3//2, fH))
 
     while(True):
         start = int(round(time.time() * 1000))
-        # # Capture frame-by-frame
-        # ret, frame = cap.read()
-        # if not ret:
-        #     print("Cannot read a frame from video stream")
-        #     break
         
         frame = video_getter.frame
-        # frame = cv2.resize(frame, (0,0), fx=0.8, fy=0.8)
-        # video_shower.frame = frameq
+        # video_shower.frame = frame
         
         fgmask = fgbg.apply(frame)
         fgmask = cv2.medianBlur(fgmask, 3)
@@ -143,7 +127,6 @@ if __name__ == "__main__":
                 cv2.rectangle(frame,box[0],box[1],(255,255,255),2)
                 # cv2.imshow("mask", blankImage)
                 idx = names.index(name)
-                fH, fW = fgmask.shape[:2]
                 tH, tW = templates_gray[idx].shape[:2]
                 tt = cv2.copyMakeBorder(templates_gray[idx], 50, fH-tH-50, 50, fW-tW-50, cv2.BORDER_CONSTANT,value=0)
             v_comb = np.vstack([blankImage, tt])
@@ -153,20 +136,20 @@ if __name__ == "__main__":
         v_comb = cv2.resize(v_comb, (0,0), fx=0.5, fy=0.5)
         v_comb = cv2.cvtColor(v_comb, cv2.COLOR_GRAY2BGR)
         combined = np.hstack([frame, v_comb])
-        
         cv2.imshow("MyVideo", combined)
         # video_shower.frame = combined
-        out.write(frame)
+        out.write(combined)
         end=int(round(time.time() * 1000)) - start
         print("FPS=",(1000.0/end))
         if cv2.waitKey(1) & 0xFF == ord('q') or video_getter.stopped:
             video_getter.stop()
             # video_shower.stop()
             cv2.imwrite('skinDetection.png', blankImage)
+            out.release()
             break
     
 
-    # When everything done, release the capture
+    # When everything done, release the capture 
     cv2.destroyAllWindows()
 
 

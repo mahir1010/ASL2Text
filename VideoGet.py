@@ -21,6 +21,9 @@ class VideoGet:
         self.stream.set(cv2.CAP_PROP_FRAME_HEIGHT, frameheight)
         
         (self.grabbed, self.frame) = self.stream.read()
+        if not self.grabbed:
+            print('Cannot read a frame from video stream')
+            self.stopped = True
         self.stopped = False
 
     def start(self):    
