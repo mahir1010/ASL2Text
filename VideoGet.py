@@ -15,8 +15,11 @@ class VideoGet:
     with a dedicated thread.
     """
 
-    def __init__(self, src=0):
+    def __init__(self, src=0, framewidth=640, frameheight=480):
         self.stream = cv2.VideoCapture(src)
+        self.stream.set(cv2.CAP_PROP_FRAME_WIDTH, framewidth)
+        self.stream.set(cv2.CAP_PROP_FRAME_HEIGHT, frameheight)
+        
         (self.grabbed, self.frame) = self.stream.read()
         self.stopped = False
 

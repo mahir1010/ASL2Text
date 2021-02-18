@@ -3,7 +3,8 @@
 """
 Created on Sat Feb 13 23:16:00 2021
 
-@author: even
+@team : 
+    Neel, Mahir, Sherry, Yiwen
 """
 import cv2
 import numpy as np
@@ -93,16 +94,17 @@ if __name__ == "__main__":
     # if not cap.isOpened():
     #     print("Cannot open the video cam")
     #     sys.exit()
-    video_getter = VideoGet(0).start()
+    
+    fW = 640
+    fH = 480
+    video_getter = VideoGet(0,fW,fH).start()
     # video_shower = VideoShow(video_getter.frame).start()
     
-    
-    # # create a window called "MyVideo"
     cv2.namedWindow("MyVideo", cv2.WINDOW_AUTOSIZE)
     fgbg = cv2.createBackgroundSubtractorKNN()
     
     fourcc = cv2.VideoWriter_fourcc(*'MPEG')
-    out = cv2.VideoWriter('output.avi', fourcc,9.0, (640, 480))
+    out = cv2.VideoWriter('output.avi', fourcc, 9.0, (fW*3//2, fH*3//2))
 
     while(True):
         start = int(round(time.time() * 1000))
@@ -154,7 +156,7 @@ if __name__ == "__main__":
         
         cv2.imshow("MyVideo", combined)
         # video_shower.frame = combined
-        out.write(frame)
+        out.write(combined)
         end=int(round(time.time() * 1000)) - start
         print("FPS=",(1000.0/end))
         if cv2.waitKey(1) & 0xFF == ord('q') or video_getter.stopped:
@@ -165,7 +167,7 @@ if __name__ == "__main__":
     
 
     # When everything done, release the capture
-    # cap.release()
+    out.release()
     cv2.destroyAllWindows()
 
 
