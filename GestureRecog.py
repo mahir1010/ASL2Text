@@ -104,7 +104,7 @@ if __name__ == "__main__":
     fgbg = cv2.createBackgroundSubtractorKNN()
     
     fourcc = cv2.VideoWriter_fourcc(*'MPEG')
-    out = cv2.VideoWriter('output.avi', fourcc, 9.0, (fW*3//2, fH*3//2))
+    out = cv2.VideoWriter('output.avi', fourcc, 9.0, (640, 480))
 
     while(True):
         start = int(round(time.time() * 1000))
@@ -156,7 +156,7 @@ if __name__ == "__main__":
         
         cv2.imshow("MyVideo", combined)
         # video_shower.frame = combined
-        out.write(combined)
+        out.write(frame)
         end=int(round(time.time() * 1000)) - start
         print("FPS=",(1000.0/end))
         if cv2.waitKey(1) & 0xFF == ord('q') or video_getter.stopped:
@@ -167,7 +167,6 @@ if __name__ == "__main__":
     
 
     # When everything done, release the capture
-    out.release()
     cv2.destroyAllWindows()
 
 
