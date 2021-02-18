@@ -125,14 +125,13 @@ if __name__ == "__main__":
                 box = [(startX, startY), (endX, endY)]
                 cv2.putText(frame,name,(40,40),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,0),2)
                 cv2.rectangle(frame,box[0],box[1],(255,255,255),2)
-                # cv2.imshow("mask", blankImage)
                 idx = names.index(name)
                 tH, tW = templates_gray[idx].shape[:2]
                 tt = cv2.copyMakeBorder(templates_gray[idx], 50, fH-tH-50, 50, fW-tW-50, cv2.BORDER_CONSTANT,value=0)
             v_comb = np.vstack([blankImage, tt])
         else:
             v_comb = np.vstack([fgmask, tt])
-        # cv2.imshow('merged', fgmask)
+
         v_comb = cv2.resize(v_comb, (0,0), fx=0.5, fy=0.5)
         v_comb = cv2.cvtColor(v_comb, cv2.COLOR_GRAY2BGR)
         combined = np.hstack([frame, v_comb])
@@ -145,7 +144,6 @@ if __name__ == "__main__":
             video_getter.stop()
             # video_shower.stop()
             cv2.imwrite('skinDetection.png', blankImage)
-            out.release()
             break
     
 
