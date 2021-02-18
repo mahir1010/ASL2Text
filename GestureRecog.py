@@ -12,6 +12,7 @@ import glob
 # import imutils
 from VideoGet import VideoGet
 from VideoShow import VideoShow
+import time
 
 
 #Skin Detection using HSV color space
@@ -100,10 +101,11 @@ if __name__ == "__main__":
     cv2.namedWindow("MyVideo", cv2.WINDOW_AUTOSIZE)
     fgbg = cv2.createBackgroundSubtractorKNN()
     
-    fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    out = cv2.VideoWriter('output.mp4', fourcc,30.0, (640, 480))
+    fourcc = cv2.VideoWriter_fourcc(*'MPEG')
+    out = cv2.VideoWriter('output.avi', fourcc,9.0, (640, 480))
 
     while(True):
+        start = int(round(time.time() * 1000))
         # # Capture frame-by-frame
         # ret, frame = cap.read()
         # if not ret:
@@ -111,8 +113,8 @@ if __name__ == "__main__":
         #     break
         
         frame = video_getter.frame
-        frame = cv2.resize(frame, (0,0), fx=0.8, fy=0.8)
-        # video_shower.frame = frame
+        # frame = cv2.resize(frame, (0,0), fx=0.8, fy=0.8)
+        # video_shower.frame = frameq
         
         fgmask = fgbg.apply(frame)
         fgmask = cv2.medianBlur(fgmask, 3)
@@ -142,10 +144,10 @@ if __name__ == "__main__":
                 fH, fW = fgmask.shape[:2]
                 tH, tW = templates_gray[idx].shape[:2]
                 tt = cv2.copyMakeBorder(templates_gray[idx], 50, fH-tH-50, 50, fW-tW-50, cv2.BORDER_CONSTANT,value=0)
-        # cv2.imshow("skinDetection",skinMatching)
-        
+            v_comb = np.vstack([blankImage, tt])
+        else:
+            v_comb = np.vstack([fgmask, tt])
         # cv2.imshow('merged', fgmask)
-        v_comb = np.vstack([fgmask, tt])
         v_comb = cv2.resize(v_comb, (0,0), fx=0.5, fy=0.5)
         v_comb = cv2.cvtColor(v_comb, cv2.COLOR_GRAY2BGR)
         combined = np.hstack([frame, v_comb])
@@ -153,6 +155,8 @@ if __name__ == "__main__":
         cv2.imshow("MyVideo", combined)
         # video_shower.frame = combined
         out.write(frame)
+        end=int(round(time.time() * 1000)) - start
+        print("FPS=",(1000.0/end))
         if cv2.waitKey(1) & 0xFF == ord('q') or video_getter.stopped:
             video_getter.stop()
             # video_shower.stop()
