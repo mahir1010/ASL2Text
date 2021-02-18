@@ -42,13 +42,15 @@
 
         <h1>CS 585 HW 2 Part 2</h1>
         <p>
+            Yiwen Gu
+            <br>
             Mahir Patel
             <br>
             Navoneel Ghosh
             <br>
             Sherry Courington
             <br>
-            Yiwen Gu
+            
 
         </p>
 
@@ -173,39 +175,39 @@
             </p>
 
             <hr>
-            <h2>
-                Results</h2>
+            <h2>Results</h2>
+            
             <p>
-                List your experimental results.  Provide examples of input images and output
-                    images. If relevant, you may provide images showing any intermediate steps.
-                <br>
-                If your work involves videos, you can add links here, but also make
-                     sure to follow the specific homework instructions on how to submit
-                     videos.
-
+                      The figure below shows the matching results for the 4 templates, i.e. 'L', 'U', 'C', 'K', as well as two failed cases. Each panel is composed by three images. The left (biggest) one is the frame read from webcam with matched letter showed on its top left corner if found. The top right image is the masked input frames that is used for template matching. The bottom right image in each panel is the template if found. 
             </p>
-            <p><iframe src="https://drive.google.com/file/d/1ru5tYk0ocVXxh-YlHVeRCf11NirX_Z-B/preview" width="640" height="480"></iframe></p>
-            <p>
                 <table class="tg">
-                    <thead>
-                      <tr>
+                  <tbody>
+                    <tr>
                         <th class="tg-0lax">L</th>
                         <th class="tg-0lax">U</th>
                         <th class="tg-0lax">C</th>
                         <th class="tg-0lax">K</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="tg-0lax"><img src="images/L.jpg" style="width:50%;height: auto;"></td>
-                        <td class="tg-0lax"><img src="images/U.jpg" style="width:50%;height: auto;"></td>
-                        <td class="tg-0lax"><img src="images/C.jpg" style="width:50%;height: auto;"></td>
-                        <td class="tg-0lax"><img src="images/K.jpg" style="width:50%;height: auto;"></td>
-                      </tr>
-                    </tbody>
-                    </table>
-            </p>
+                    </tr>
+                    <tr>
+                      <td class="tg-0lax"><img src="images/L.png" style="width:90%;height: auto;"></td>
+                      <td class="tg-0lax"><img src="images/U.png" style="width:90%;height: auto;"></td>
+                      <td class="tg-0lax"><img src="images/C.png" style="width:90%;height: auto;"></td>
+                      <td class="tg-0lax"><img src="images/K.png" style="width:90%;height: auto;"></td>
+                    </tr>
+                    <tr>
+                        <th class="tg-0lax">Failed Case 1: face too close</th>
+                        <th class="tg-0lax">Failed Case 2: no template found</th>
+                    </tr>
+                    <tr>
+                      <td class="tg-0lax"><img src="images/failedCase1.png" style="width:90%;height: auto;"></td>
+                      <td class="tg-0lax"><img src="images/failedCase2.png" style="width:90%;height: auto;"></td>
+                    </tr>
 
+                  </tbody>
+                </table>
+            
+            <h4> The below is a video without side panels. </h4>
+            <p><iframe src="https://drive.google.com/file/d/1ru5tYk0ocVXxh-YlHVeRCf11NirX_Z-B/preview" width="480" height="270"></iframe></p>
 
             <hr>
             <h2>
@@ -217,7 +219,7 @@
                     <strong>Strengths:
                     </strong>
                     <li>
-                        Our results show that method we adopted is generally successful. We get an accuracy of 0.72
+                        Our results show that method we adopted is generally successful. We get an accuracy of 0.74
                     </li>
                     <li>
                         We scaled our input images progressively during the mathching. As a result, the algorithm will recognize a matched shape as long as the hand is view and not too small.</li>
@@ -260,9 +262,9 @@
             </h2>
             <p>
                 For multiple threading:
-                    https://nrsyed.com/2018/07/05/multithreading-with-opencv-python-to-improve-video-processing-performance/
-                    Opencv-python
-                    https://opencv-python-tutroals.readthedocs.io/en/latest/<hr>
+                https://nrsyed.com/2018/07/05/multithreading-with-opencv-python-to-improve-video-processing-performance/ <br>
+                Opencv-python
+                https://opencv-python-tutroals.readthedocs.io/en/latest/
             </p>
         </div>
     </body>
