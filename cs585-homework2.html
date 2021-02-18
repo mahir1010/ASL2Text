@@ -1,0 +1,154 @@
+
+<html>
+<head>
+<title> CS585 Homework Template: HW[x] Student Name [xxx]  </title>
+<style>
+<!--
+body{
+font-family: 'Trebuchet MS', Verdana;
+}
+p{
+font-family: 'Trebuchet MS', Times;
+margin: 10px 10px 15px 20px;
+}
+h3{
+margin: 5px;
+}
+h2{
+margin: 10px;
+}
+h1{
+margin: 10px 0px 0px 20px;
+}
+div.main-body{
+align:center;
+margin: 30px;
+}
+hr{
+margin:20px 0px 20px 0px;
+}
+-->
+</style>
+</head>
+
+<body>
+<center>
+<a href="http://www.bu.edu"><img border="0" src="http://www.cs.bu.edu/fac/betke/images/bu-logo.gif"
+width="119" height="120"></a>
+</center>
+
+<h1>CS 585 HW 2 Part 2</h1>
+<p>
+ Yiwen Gu <br>
+ Neel <br>
+ Mahir Patel <br>
+ Sherry Courington <br>
+ 
+</p>
+
+<p> 2021.2.17 </p>
+
+<div class="main-body">
+<hr>
+<h2> Overall Description </h2>
+<p>
+We use computer vision techniques to recognize hand shapes in a video stream.
+</p>
+
+<hr>
+<h2> Method and Implementation </h2>
+<p>Give a concise description of the implemented method. For example, you might
+  describe the motivation of your idea, the algorithmic steps of your methods, or
+  the mathematical formulation of your method. 
+</p>
+
+<p>
+Briefly outline the functions you created in your code to carry out the
+algorithmic steps you described earlier.
+</p>
+
+<hr>
+<h2>Experiments</h2>
+<p>
+Our </p>
+<p>
+We use confusion matrix to evaluate our results. </p>
+
+
+<hr>
+<h2> Results</h2>
+<p>
+List your experimental results.  Provide examples of input images and output
+images. If relevant, you may provide images showing any intermediate steps. 
+<br>
+ If your work involves videos, you can add links here, but also make
+ sure to follow the specific homework instructions on how to submit
+ videos.
+
+</p>
+
+<p>
+<table>
+<tr><td colspan=3><center><h3>Results</h3></center></td></tr>
+<tr>
+<td> Trial </td><td> Source Image </td> <td> Result Image</td> 
+</tr>
+<tr>
+  <td> trial 1 </td> 
+  <td> <img src="trial1.jpg"> </td> 
+  <td> <img src="result1.jpg"> </td>
+</tr> 
+<tr>
+  <td> trial 2 </td> 
+  <td> <img src="trial2.jpg"> </td> 
+  <td> <img src="result2.jpg"> </td>
+</tr> 
+<tr>
+  <td> trial 3 </td> 
+  <td> <img src="trial3.jpg"> </td> 
+  <td> <img src="result3.jpg"> </td>
+</tr> 
+</table>
+</p>
+
+
+
+<hr>
+<h2> Discussion </h2>
+
+<p> 
+<ul> <strong>Strengths: </strong>
+<li> Our results show that method we adopted is generally successful. We get an accuracy of 0.72 </li>
+<li> We scaled our input images progressively during the mathching. As a result, the algorithm will recognize a mathed shape as long as the hand is view and not too small.</li>
+<li> We implemented multithreading and the we read frames from the webcam in a separate thread. As a result, our videos in the graphic display looks smoother. </li>
+</ul>
+<ul> <strong>Limitations: </strong>
+<li> Our classifier works in normal lightening but if it is too bright or dark, errors will be introduced. </li>
+<li> If the hand in the video is too small (smaller than the template resolution), the mathcing won't be detected. </li>
+</ul>
+<ul> <strong>Potential future work: </strong>
+<li> Calculate the orientaion of the templates and objects detected, so that a certain amount of rotation can be allowed. </li> 
+<li> Include all the 26 alphabets and/or 10 digits to templates for matching so that we can spell anything. </li> 
+</ul>
+<ul> <strong>Fun fact: </strong>
+<li> We intentally chose our templates that says "L", "U", "C", "K". We wish all of you and ourselves good luck in the 2021.</li>
+</ul>
+</p>
+
+
+
+<hr>
+<h2> Credits and Bibliography </h2>
+<p>
+For multiple threading:
+https://nrsyed.com/2018/07/05/multithreading-with-opencv-python-to-improve-video-processing-performance/
+Opencv-python
+https://opencv-python-tutroals.readthedocs.io/en/latest/
+
+<hr>
+</div>
+</body>
+
+
+
+</html>
