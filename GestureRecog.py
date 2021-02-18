@@ -43,11 +43,8 @@ def matchTemplate(img, templates, titles, method=cv2.TM_CCORR_NORMED):
     bounding box.
 
     '''
-    img2 = img.copy()
+
     found = None
-    maxMatch = None
-    box = None
-    matchName = None
     # loop over the scales of the image
     for scale in np.linspace(0.2, 1.0, 20)[::-1]:
         resized = cv2.resize(img, (int(img.shape[1] * scale),int(img.shape[0] * scale)))
@@ -76,34 +73,9 @@ def matchTemplate(img, templates, titles, method=cv2.TM_CCORR_NORMED):
     
     return maxVal, t, startX, startY, endX, endY
 
-    
-def main():
-    """
-    Dedicated thread for grabbing video frames with VideoGet object.
-    Dedicated thread for showing video frames with VideoShow object.
-    Main thread serves only to pass frames between VideoGet and
-    VideoShow objects/threads.
-    """
-    source=0
-    video_getter = VideoGet(source).start()
-    video_shower = VideoShow(video_getter.frame).start()
-    # cps = CountsPerSec().start()
-
-    while True:
-        if video_getter.stopped or video_shower.stopped:
-            video_shower.stop()
-            video_getter.stop()
-            break
-
-        frame = video_getter.frame
-        # frame = putIterationsPerSec(frame, cps.countsPerSec())
-        video_shower.frame = frame
-        # cps.increment()
-
 
 
 if __name__ == "__main__":
-    # main()
     
     # read templates from folder
     templates = glob.glob("templates/*.png")
@@ -129,7 +101,7 @@ if __name__ == "__main__":
     fgbg = cv2.createBackgroundSubtractorKNN()
     
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    out = cv2.VideoWriter('output.avi', fourcc,30.0, (640, 480))
+    out = cv2.VideoWriter('output.mp4', fourcc,30.0, (640, 480))
 
     while(True):
         # # Capture frame-by-frame
@@ -180,7 +152,7 @@ if __name__ == "__main__":
         
         cv2.imshow("MyVideo", combined)
         # video_shower.frame = combined
-        # out.write(frame)
+        out.write(frame)
         if cv2.waitKey(1) & 0xFF == ord('q') or video_getter.stopped:
             video_getter.stop()
             # video_shower.stop()
@@ -190,7 +162,6 @@ if __name__ == "__main__":
 
     # When everything done, release the capture
     # cap.release()
-    video_getter.release()
     cv2.destroyAllWindows()
 
 
