@@ -1,41 +1,4 @@
 <html>
-    <head>
-        <title>
-            Mahir Patel - CS585 Assignment 2
-        </title>
-        <style>
-            <!--
-            body {
-                font-family: 'Trebuchet MS', Verdana;
-            }
-            p {
-                font-family: 'Trebuchet MS', Times;
-                margin: 10px 10px 15px 20px;
-            }
-            h3 {
-                margin: 5px;
-            }
-            h2 {
-                margin: 10px;
-            }
-            h1 {
-                margin: 10px 0 0 20px;
-            }
-            div.main-body {
-                align: center;
-                margin: 30px;
-            }
-            hr {
-                margin: 20px 0;
-            }
-            table,
-            th,
-            td {
-                border: 1px solid #212121
-            }
-            -->
-        </style>
-    </head>
     <body>
         <h1>CS 585 HW 2 Part 2</h1>
         <p>
