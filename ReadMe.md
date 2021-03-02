@@ -134,7 +134,7 @@ The above figure shows the matching results for the 4 templates, i.e. 'L', 'U', 
 </tr>
 </thead>
 <tbody>
-<tr><td><image src="images/L.jpg"></td><td><image src="images/U.jpg"></td><td><image src="images/C.jpg"></td><td><image src="images/K.jpg"></td></tr>
+  <tr><td><image src="images/L.jpg"></img></td><td><image src="images/U.jpg"></img></td><td><image src="images/C.jpg"></img></td><td><image src="images/K.jpg"></img></td></tr>
 </tbody>
 </table>
 
