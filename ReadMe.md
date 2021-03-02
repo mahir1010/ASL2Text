@@ -25,7 +25,6 @@ Our process starts with background subtraction to perform motion segmentation. W
 ## Experiments
 
 We created a confusion matrix from 97 frames of one of the videos of our gesture detection.
-### Confusion Matrix
 <table>
 <tbody>
 <tr>
