@@ -1,4 +1,4 @@
-# CS 585 HW 2 Part 2
+# ASL2Text
 
 Mahir Patel  
 Navoneel Ghosh  
