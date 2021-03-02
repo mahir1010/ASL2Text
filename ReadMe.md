@@ -244,13 +244,13 @@ The above figure shows the matching results for the 4 templates, i.e. 'L', 'U', 
 
 <tr>
 
-<td class="tg-0lax">![](images/L.jpg)</td>
+<td class="tg-0lax"><image src="images/L.jpg"></td>
 
-<td class="tg-0lax">![](images/U.jpg)</td>
+<td class="tg-0lax"><image src="images/U.jpg"></td>
 
-<td class="tg-0lax">![](images/C.jpg)</td>
+<td class="tg-0lax"><image src="images/C.jpg"></td>
 
-<td class="tg-0lax">![](images/K.jpg)</td>
+<td class="tg-0lax"><image src="images/K.jpg"></td>
 
 </tr>
 
