@@ -124,40 +124,23 @@ If your work involves videos, you can add links here, but also make sure to foll
 
 The above figure shows the matching results for the 4 templates, i.e. 'L', 'U', 'C', 'K'. Each panel is composed by three images. The left (biggest) one is the frame read from webcam with matched letter showed on its top left corner if found. The top right image is the masked input frames that is used for template matching. The bottom right image in each panel is the template if found.
 
-<table class="tg">
-
+<table>
 <thead>
-
 <tr>
-
-<th class="tg-0lax">L</th>
-
-<th class="tg-0lax">U</th>
-
-<th class="tg-0lax">C</th>
-
-<th class="tg-0lax">K</th>
-
+<th>L</th>
+<th>U</th>
+<th>C</th>
+<th>K</th>
 </tr>
-
 </thead>
-
 <tbody>
-
 <tr>
-
-<td class="tg-0lax"><image src="images/L.jpg"></td>
-
-<td class="tg-0lax"><image src="images/U.jpg"></td>
-
-<td class="tg-0lax"><image src="images/C.jpg"></td>
-
-<td class="tg-0lax"><image src="images/K.jpg"></td>
-
+<td ><image src="images/L.jpg"></td>
+<td ><image src="images/U.jpg"></td>
+<td ><image src="images/C.jpg"></td>
+<td ><image src="images/K.jpg"></td>
 </tr>
-
 </tbody>
-
 </table>
 
 * * *
