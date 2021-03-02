@@ -131,7 +131,7 @@ The above figure shows the matching results for the 4 templates, i.e. 'L', 'U', 
 
 | L | U | C | K |
 :---------------------:|:----------------------:|:----------------------:|:----------------------:|
-![](images/output.gif) | ![](images/output.gif) | ![](images/output.gif) | ![](images/output.gif)
+![](images/L.jpg) | ![](images/U.jpg) | ![](images/C.jpg) | ![](images/K.jpg)
 |   |   |   |   |
 
 * * *
