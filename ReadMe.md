@@ -156,13 +156,10 @@ The above figure shows the matching results for the 4 templates, i.e. 'L', 'U', 
 
 * * *
 
-## Credits and Bibliography
+## Credits and Bibliography 
+[For multiple threading](https://nrsyed.com/2018/07/05/multithreading-with-opencv-python-to-improve-video-processing-performance/)
 
-For multiple threading:  
-https://nrsyed.com/2018/07/05/multithreading-with-opencv-python-to-improve-video-processing-performance/
-
-Opencv-python:  
-https://opencv-python-tutroals.readthedocs.io/en/latest/
+[Opencv-python](https://opencv-python-tutroals.readthedocs.io/en/latest/)
 
 * * *
 
