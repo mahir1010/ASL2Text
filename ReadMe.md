@@ -29,6 +29,11 @@ We created a confusion matrix from 97 frames of one of the videos of our gesture
 <table>
 <tbody>
 <tr>
+<td colspan="8">
+<h3>Confusion Matrix</h3>
+</td>
+</tr>
+<tr>
 <td></td>
 <td></td>
 <td></td>
