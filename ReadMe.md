@@ -7,7 +7,6 @@ Yiwen Gu
 
 2021.2.17
 
-<div class="main-body">
 
 * * *
 
@@ -290,4 +289,3 @@ https://opencv-python-tutroals.readthedocs.io/en/latest/
 
 * * *
 
-</div>
