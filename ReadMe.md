@@ -135,10 +135,10 @@ The above figure shows the matching results for the 4 templates, i.e. 'L', 'U', 
 </thead>
 <tbody>
 <tr>
-<td ><image src="images/L.jpg"></td>
-<td ><image src="images/U.jpg"></td>
-<td ><image src="images/C.jpg"></td>
-<td ><image src="images/K.jpg"></td>
+<td><image src="images/L.jpg"></td>
+<td><image src="images/U.jpg"></td>
+<td><image src="images/C.jpg"></td>
+<td><image src="images/K.jpg"></td>
 </tr>
 </tbody>
 </table>
